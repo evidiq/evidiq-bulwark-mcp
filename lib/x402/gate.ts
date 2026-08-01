@@ -151,11 +151,20 @@ export async function handleX402Gate(
       return handler(modifiedReq);
     }
 
+    // An empty or unparseable body is answered here, with the challenge, and never
+    // forwarded. Forwarding it reached the MCP transport, which calls req.json() and
+    // threw asynchronously — an unhandled rejection that killed the process, so
+    // Traefik answered 502 until the container restarted. A validator probing an
+    // unauthenticated endpoint sends exactly this.
+    if (bodyText.trim() === "") {
+      return build402Response("scan_prompt_injection");
+    }
+
     let jsonRpc: any = null;
     try {
       jsonRpc = JSON.parse(bodyText);
     } catch {
-      return handler(modifiedReq);
+      return build402Response("scan_prompt_injection");
     }
 
     if (jsonRpc && jsonRpc.method === "tools/call" && jsonRpc.params) {
