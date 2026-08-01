@@ -5,7 +5,7 @@
 <p align="center"><strong>Prompt Injection &amp; LLM Input Safety Guard</strong></p>
 
 <p align="center">
-  Deterministic prompt-injection, jailbreak, data-exfiltration, and system-prompt-leak scanner for autonomous AI agents — pattern lexicons, structural heuristics, and known-technique signatures, with 0G-anchored EIP-191 attestation.
+  Deterministic prompt-injection, jailbreak, data-exfiltration, and system-prompt-leak scanner for autonomous AI agents — with EIP-191 signed attestations and best-effort 0G Storage anchoring.
 </p>
 
 <p align="center">
@@ -22,6 +22,7 @@
   <a href="https://www.oklink.com/xlayer"><img src="https://img.shields.io/badge/X%20Layer-USDT0-3CCF4E?style=flat-square" alt="X Layer USDT0" /></a>
   <a href="https://mcp.evidiq.dev/bulwark/x402"><img src="https://img.shields.io/badge/x402-0.005%E2%80%930.03%20USDT0-2563EB?style=flat-square" alt="x402: 0.005 to 0.03 USDT0" /></a>
   <a href="https://web3.okx.com/onchainos/dev-docs/payments/service-seller-sdk"><img src="https://img.shields.io/badge/Payments-Official%20OKX%20SDK-121212?style=flat-square&logo=okx&logoColor=white" alt="Official OKX Payment SDK" /></a>
+  <a href="https://www.okx.ai/agents/10385"><img src="https://img.shields.io/badge/OKX.AI-Agent%20%2310385%20Under%20Review-121212?style=flat-square&logo=okx&logoColor=white" alt="OKX.AI Agent 10385 listed" /></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-3DA639?style=flat-square" alt="License: MIT" /></a>
 </p>
 
@@ -32,7 +33,7 @@ As AI agents process user inputs, retrieved documents, and tool outputs, they ar
 **EVIDIQ Bulwark is the prompt/input safety guard for autonomous agents.**
 Pass it prompts, retrieved context, RAG chunks, or incoming messages; Bulwark executes a deterministic pattern-based detection pipeline for direct injection, indirect injection, jailbreak techniques, data-exfiltration payloads, and system-prompt leaks — returning a `BLOCK`/`WARN`/`ALLOW` verdict with signed, 0G-anchored evidence.
 
-> **Launch status: Phase 1 — test build deployed.** The MCP server runs at `https://mcp.evidiq.dev/bulwark/mcp` with `BULWARK_X402_BYPASS=1` (all tools free). x402 payment gating, OKX.AI registration, and on-chain proof come in Phase 2.
+> **Launch status: live endpoint.** The MCP server is deployed at `https://mcp.evidiq.dev/bulwark/mcp`, paid calls settle through the official OKX Payment SDK, and the OKX.AI listing (**Agent #10385**) is submitted and under review. 0G Storage anchoring is implemented as best-effort post-report; it does not affect the verdict or `reportDigest`.
 
 ---
 
@@ -42,7 +43,7 @@ Pass it prompts, retrieved context, RAG chunks, or incoming messages; Bulwark ex
 - **Jailbreak Technique Signatures** — DAN variants, prefix injection, roleplay bypass, credential interleaving.
 - **Data-Exfiltration Payloads** — URL-based extraction (webhooks, data URIs), encoded large blobs, tool-call hijack for data theft.
 - **System-Prompt Leak Probes** — instruction repetition requests, rule extraction, system-prompt reflection, config extraction.
-- **Canonical Attestation & 0G Storage Anchoring** — RFC 8785 (JCS) SHA-256 report digest signed via EIP-191 ECDSA and anchored on 0G Storage.
+- **Canonical Attestation & 0G Storage Anchoring** — RFC 8785 (JCS) SHA-256 report digest signed via EIP-191 ECDSA, anchorable on 0G Storage (best-effort, post-report; does not affect verdict or digest).
 - **Deterministic Verdict Precedence** — `BLOCK` > `WARN` > `ALLOW`. No model, no network, no random source in the verdict path.
 - **Pay per scan** — Five paid tools at `0.005–0.03 USDT0`; five preflight and verification tools are free.
 
