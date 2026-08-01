@@ -59,12 +59,18 @@ A natural chain: `validate_prompt_input` → `scan_prompt_injection` / `scan_jai
 
 ## Proven on-chain
 
-Live paid call against the deployed endpoint completed the full x402 v2 round trip through the official OKX facilitator:
+### x402 Payment Settlement (X Layer, chain 196)
 
 | Tool | Amount | Settlement tx | Result |
 |------|--------|---------------|--------|
 | `scan_prompt_injection` | `0.005 USDT0` (`5000` atomic) | [`0x8889c64e…69753eb`](https://www.oklink.com/xlayer/tx/0x8889c64e55b5149ce331841aeecec1047dbcee5d41004a7cb651c278b66953eb) | `0x1` · verdict BLOCK · `reportDigest` reproducible (RFC 6979) |
-| `attest_prompt_safety` | `0.03 USDT0` (`30000` atomic) | [`0x9445db28…`](https://www.oklink.com/xlayer/tx/0x9445db28c3e07936ed4961039ec7b99debda9d31848) | `0x1` · verdict BLOCK · `zeroGAnchorTx` `0x3d578f19…` · `zeroGStorageRoot` `0xd5b0cabf…` |
+| `attest_prompt_safety` | `0.03 USDT0` (`30000` atomic) | [`0x9445db28…`](https://www.oklink.com/xlayer/tx/0x9445db28c3e07936ed4961039ec7b99debda9d31848) | `0x1` · verdict BLOCK · `reportDigest` `0x594cbad1…` · `signature` `0x21f89f64…` |
+
+### 0G Storage Anchoring (0G mainnet, chain 16661)
+
+| Anchor tx | Storage root | Verified |
+|-----------|-------------|----------|
+| [`0x3d578f19…281a4`](https://chainscan.0g.ai/tx/0x3d578f1934ee0d41b3f8703e275277c1c7fc5cdcf02e90e239dbde18797281a4) | `0xd5b0cabf3a4cfcb97769ff001413f93e0ada010106ca3ba6960b1564fb01473d` | `status 0x1` on 0G mainnet |
 
 ---
 
