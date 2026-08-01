@@ -33,7 +33,7 @@ As AI agents process user inputs, retrieved documents, and tool outputs, they ar
 **EVIDIQ Bulwark is the prompt/input safety guard for autonomous agents.**
 Pass it prompts, retrieved context, RAG chunks, or incoming messages; Bulwark executes a deterministic pattern-based detection pipeline for direct injection, indirect injection, jailbreak techniques, data-exfiltration payloads, and system-prompt leaks — returning a `BLOCK`/`WARN`/`ALLOW` verdict with signed, 0G-anchored evidence.
 
-> **Launch status: live endpoint.** The MCP server is deployed at `https://mcp.evidiq.dev/bulwark/mcp`, paid calls settle through the official OKX Payment SDK, and the OKX.AI listing (**Agent #10385**) is submitted and under review. 0G Storage anchoring is implemented as best-effort post-report; it does not affect the verdict or `reportDigest`.
+> **Launch status: live endpoint.** The MCP server is deployed at `https://mcp.evidiq.dev/bulwark/mcp`, paid calls settle through the official OKX Payment SDK, and the OKX.AI listing (**Agent #10385**) is submitted and under review. 0G Storage anchoring is live — `attest_prompt_safety` returns a real `zeroGAnchorTx` + `zeroGStorageRoot`.
 
 ---
 
@@ -43,7 +43,7 @@ Pass it prompts, retrieved context, RAG chunks, or incoming messages; Bulwark ex
 - **Jailbreak Technique Signatures** — DAN variants, prefix injection, roleplay bypass, credential interleaving.
 - **Data-Exfiltration Payloads** — URL-based extraction (webhooks, data URIs), encoded large blobs, tool-call hijack for data theft.
 - **System-Prompt Leak Probes** — instruction repetition requests, rule extraction, system-prompt reflection, config extraction.
-- **Canonical Attestation & 0G Storage Anchoring** — RFC 8785 (JCS) SHA-256 report digest signed via EIP-191 ECDSA, anchorable on 0G Storage (best-effort, post-report; does not affect verdict or digest).
+- **Canonical Attestation & 0G Storage Anchoring** — RFC 8785 (JCS) SHA-256 report digest signed via EIP-191 ECDSA and anchored on 0G Storage.
 - **Deterministic Verdict Precedence** — `BLOCK` > `WARN` > `ALLOW`. No model, no network, no random source in the verdict path.
 - **Pay per scan** — Five paid tools at `0.005–0.03 USDT0`; five preflight and verification tools are free.
 
@@ -64,6 +64,7 @@ Live paid call against the deployed endpoint completed the full x402 v2 round tr
 | Tool | Amount | Settlement tx | Result |
 |------|--------|---------------|--------|
 | `scan_prompt_injection` | `0.005 USDT0` (`5000` atomic) | [`0x8889c64e…69753eb`](https://www.oklink.com/xlayer/tx/0x8889c64e55b5149ce331841aeecec1047dbcee5d41004a7cb651c278b66953eb) | `0x1` · verdict BLOCK · `reportDigest` reproducible (RFC 6979) |
+| `attest_prompt_safety` | `0.03 USDT0` (`30000` atomic) | [`0x9445db28…`](https://www.oklink.com/xlayer/tx/0x9445db28c3e07936ed4961039ec7b99debda9d31848) | `0x1` · verdict BLOCK · `zeroGAnchorTx` `0x3d578f19…` · `zeroGStorageRoot` `0xd5b0cabf…` |
 
 ---
 
